@@ -1,10 +1,10 @@
 package main
 
 import (
+	"bytes"
+	"encoding/binary"
 	"fmt"
 	"net"
-	"encoding/binary"
-	"bytes"
 )
 
 func main() {
@@ -15,11 +15,11 @@ func main() {
 	}
 
 	var data struct {
-		L float64
-		Cnt int32
+		X int32
+		Y int32
 	}
-	data.L = 325.54
-	data.Cnt = 34
+	data.X = 100
+	data.Y = 100
 
 	var buf bytes.Buffer
 	err = binary.Write(&buf, binary.LittleEndian, data)

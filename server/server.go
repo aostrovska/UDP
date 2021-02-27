@@ -1,13 +1,17 @@
 package main
 
 import (
+	"bytes"
+	"encoding/binary"
 	"fmt"
 	"net"
-	"encoding/binary"
-	"bytes"
+
+	"gtihub.com/nsf/termbox-go"
 )
 
 func main() {
+	termbox.Init()
+	termbox.Clear(termbox.ClororBlack, termbox.ClororBlack)
 	adr, err := net.ResolveUDPAddr("udp", "127.0.0.1:10234")
 	if err != nil {
 		fmt.Println(err)
@@ -36,14 +40,16 @@ func handleConnection(con *net.UDPConn) {
 	buff := bytes.NewReader(buf[0:n])
 
 	var data struct {
-		L float64
-		Cnt int32
+		X int32
+		Y int32
 	}
 	err = binary.Read(buff, binary.LittleEndian, &data)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	
-	fmt.Println(data)
+	termbox.SetCell(data.X, data.Y, '&', termbox.ClororWhite, termbox.ClororBlack)
+	termbox.Flush()
+	termbox.Close()
+	//fmt.Println(data)
 }

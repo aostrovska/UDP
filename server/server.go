@@ -11,7 +11,7 @@ import (
 
 func main() {
 	termbox.Init()
-	termbox.Clear(termbox.ClororBlack, termbox.ClororBlack)
+	//	termbox.Clear(termbox.ColorBlack, termbox.ColorBlack)
 	adr, err := net.ResolveUDPAddr("udp", "127.0.0.1:10234")
 	if err != nil {
 		fmt.Println(err)
@@ -48,7 +48,7 @@ func handleConnection(con *net.UDPConn) {
 		fmt.Println(err)
 		return
 	}
-	termbox.SetCell(data.X, data.Y, '&', termbox.ClororWhite, termbox.ClororBlack)
+	termbox.SetCell(int(data.X), int(data.Y), '&', termbox.ColorWhite, termbox.ColorBlack)
 	termbox.Flush()
 	termbox.Close()
 	//fmt.Println(data)

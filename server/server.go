@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"net"
 
-	"gtihub.com/nsf/termbox-go"
+	"github.com/nsf/termbox-go"
 )
 
 func main() {
